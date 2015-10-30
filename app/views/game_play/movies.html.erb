@@ -1,0 +1,9 @@
+<h1><%= @movie.title %></h1><br>
+<img src="<%=@movie.poster_url%>" height="400" width="300"><br>
+<%= @movie.tagline %><br>
+<%= @movie.overview %>
+<ul>
+<% @movie.quotes.each do |quote| %>
+<li><%= quote.quote %></li>
+<% end %>
+</ul>

@@ -1,3 +1,14 @@
 <div id="movie">
-	
 </div>
+	<%= link_to "next", '#', id: 'next' %>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#next').click(function(event){
+			event.preventDefault();
+			$.post('/movies', function(html){
+				$('#movie').html(html);
+			});
+		});
+	});
+</script>
