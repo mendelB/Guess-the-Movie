@@ -1,4 +1,4 @@
-<h1><%= @movie.title %></h1><br>
+<!-- <!-- <h1><%= @movie.title %></h1><br>
 <img src="<%=@movie.poster_url%>" height="400" width="300"><br>
 <%= @movie.tagline %><br>
 <%= @movie.overview %>
@@ -10,4 +10,71 @@ Your browser does not support the audio element.
 </audio>
 <li><%= quote.quote %></li>
 <% end %>
-</ul>
+</ul>  -->
+<style>
+  button#answer{
+color:#08233e;
+font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
+padding:14px;
+background:url(overlay.png) repeat-x center #ffcc00;background-color:rgba(255,204,0,1);
+border:1px solid #ffcc00;
+-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+border-bottom:1px solid #9f9f9f;
+-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+cursor:pointer;
+}
+
+button#answer:hover{background-color:rgba(255,204,0,0.8);}
+
+button#answer:active{position:relative;top:2px;}
+
+</style>
+
+
+
+
+<h1 align="center">Guess the Movie!</h1>
+<div align="center">
+
+<% quote_object = @movie.quotes.sample %>
+<%= quote_object.quote %>
+ <br>Genre: <%= @movie.genre %>
+<br>Release date: <%= @movie.release_date %>
+</div>
+<%#word = @movie.quotes.find_by id: (quote_object.id + 1)%>
+<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/movie_files/","")  %>
+<%= audio_tag bob, class: "audio-play" %>
+<%#binding.pry%>
+<button class="audioButton">Play</button>
+
+<button id="hint" type="button" >Hint</button>
+
+<p id="info">
+<%= @movie.overview %>
+
+</p>>
+
+<div style="margin: 10 auto; width: 656px; text-align: center;">
+<button id="answer" type="button" > <%= Movie.all.sample.title %> </button>
+<button id="answer" type="button" > <%= Movie.all.sample.title %> </button>
+<button id="answer" type="button" > <%= Movie.all.sample.title %> </button>
+<button id="answer" type="button" > <%= @movie.title%> </button>
+</div>
+
+
+
+<script>
+
+$("p#info").hide();
+
+$( "button#hint" ).click(function() {
+ $("p#info").toggle();
+
+});
+$(".audioButton").on("click", function() {
+  $(".audio-play")[0].currentTime = 0;
+  return $(".audio-play")[0].play();
+});
+
+
+</script>
