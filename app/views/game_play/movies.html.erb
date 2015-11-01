@@ -4,6 +4,10 @@
 <%= @movie.overview %>
 <ul>
 <% @movie.quotes.each do |quote| %>
+<audio controls>
+  <source src="<%=quote.audio_path%>" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
 <li><%= quote.quote %></li>
 <% end %>
 </ul>
