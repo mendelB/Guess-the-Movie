@@ -48,17 +48,21 @@ button#answer:active{position:relative;top:2px;}
 <button class="audioButton">Play</button>
 
 <button id="hint" type="button" >Hint</button>
-
+<% movies = [] %>
+<% 3.times do %>
+ <% movies << Movie.all.sample.poster_url%>
+<% end ; movies << @movie.poster_url %>
+<% movies.shuffle! %>
 <p id="info">
 <%= @movie.overview %>
 
 </p>>
 
 <div style="margin: 10 auto; width: 656px; text-align: center;">
-<button id="answer" type="button" > <%= Movie.all.sample.title %> </button>
-<button id="answer" type="button" > <%= Movie.all.sample.title %> </button>
-<button id="answer" type="button" > <%= Movie.all.sample.title %> </button>
-<button id="answer" type="button" > <%= @movie.title%> </button>
+<button id="answer" type="button" > <img src="<%=movies[0]%>" height="200" width="175"><br> </button>
+<button id="answer" type="button" > <img src="<%=movies[1]%>" height="200" width="175"> </button>
+<button id="answer" type="button" > <img src="<%=movies[2]%>" height="200" width="175"> </button>
+<button id="answer" type="button" > <img src="<%=movies[3]%>" height="200" width="175"> </button>
 </div>
 
 
@@ -75,6 +79,8 @@ $(".audioButton").on("click", function() {
   $(".audio-play")[0].currentTime = 0;
   return $(".audio-play")[0].play();
 });
-
+$('img[src="<%=@movie.poster_url%>"]').click(function(){
+	alert('hi');
+});
 
 </script>
