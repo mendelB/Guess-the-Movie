@@ -5,5 +5,6 @@ class GamePlayController < ApplicationController
 
   def movies
   	@movie = Movie.all.sample
+  	@movies = @movie.get_movies
   end
 end

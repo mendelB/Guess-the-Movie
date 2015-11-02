@@ -19,7 +19,10 @@ cursor:pointer;
 button#answer:hover{background-color:rgba(255,204,0,0.8);}
 
 button#answer:active{position:relative;top:2px;}
-
+#wrapper {
+  width: 50%;
+  margin: 0 auto;
+}
 
 /*css for button with hint*/
 
