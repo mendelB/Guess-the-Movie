@@ -6,19 +6,13 @@
 <br>Release date: <%= @movie.release_date %>
 </div>
 <%#word = @movie.quotes.find_by id: (quote_object.id + 1)%>
-<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/movie_files/","")  %>
+<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
 <%= audio_tag bob, class: "audio-play" %>
-<%#binding.pry%>
 <button class="audioButton">Play</button>
 
 <button id="hint" type="button" >Hint</button>
-<% movies = [] %>
-<% 3.times do %>
- <% movies << Movie.all.sample.poster_url%>
-<% end ; movies << @movie.poster_url %>
-<% movies.shuffle! %>
 <p id="info">
-<%= @movie.overview %>
+<%= @movie.tagline %>
 
 </p>>
 
@@ -26,47 +20,65 @@
 
 	<div class="movie_row">
 		<button id="answer" type="button" > 
-			<img src="<%=movies[0]%>" height="250" width="200"><br> 
+			<img src="<%=@movies[0]%>" height="250" width="200"><br> 
 		</button>
 
 		<button id="answer" type="button" >
-			<img src="<%=movies[1]%>" height="250" width="200">
+			<img src="<%=@movies[1]%>" height="250" width="200">
 		</button>
 	</div>
 	<div class="movie_row">
 		<button id="answer" type="button" > 
-			<img src="<%=movies[2]%>" height="250" width="200">
+			<img src="<%=@movies[2]%>" height="250" width="200">
 		</button>
 
 		<button id="answer" type="button" >
-			<img src="<%=movies[3]%>" height="250" width="200">
+			<img src="<%=@movies[3]%>" height="250" width="200">
 		</button>
 	</div>
 
 </div>
 
 <script>
+	$("p#info").hide();
 $(document).ready(function() {
-$("p#info").hide();
-$( "button#hint" ).click(function() {
- $("p#info").toggle();
+	$( "button#hint" ).click(function() {
+	 $("p#info").toggle();
 
-});
-$(".audioButton").on("click", function() {
-  $(".audio-play")[0].currentTime = 0;
-  return $(".audio-play")[0].play();
-});
-$('img[src="<%=@movie.poster_url%>"]').click(function(){
-	$('#body').html()
-	setTimeout(1)
-	score ++;
-	$('#score').text(score);
-	$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
-		$('#body').hide();
-		$('#body').html(html);
-		setTimeout(1);
-		$('#body').show('1000');
 	});
-});
+	$(".audioButton").on("click", function() {
+	  $(".audio-play")[0].currentTime = 0;
+	  return $(".audio-play")[0].play();
+	});
+
+
+	$('img').click(function(event){
+
+
+		if (event.target.src == "<%=@movie.poster_url%>") {
+			$('#body').html("<h1 align='center'>Correct!</h1>");
+			score ++;
+		} else {
+			$('#body').html("<h1 align='center'>Incorrect!</h1>");
+			wrong_count = wrong_count - 1
+		};
+		$('#score').text(score);
+		$('#wrong').text(wrong_count);
+
+		if (wrong_count == 0) {
+			$('#body').html("<h1 align='center'>Game Over!!</h1>");
+			$('#body').append("<a href='/'> Play Again!</a>");
+		} else {
+		setTimeout(function(){
+		$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+			$('#body').hide();
+			$('#body').html(html);
+			$('#body').show('9000');
+		})}, 1000);
+		};
+	});
+
+
+
 });
 </script>
