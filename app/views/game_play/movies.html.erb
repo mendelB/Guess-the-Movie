@@ -11,6 +11,7 @@ Your browser does not support the audio element.
 <li><%= quote.quote %></li>
 <% end %>
 </ul>  -->
+
 <script type="text/javascript">
 	var score = 0
 </script>
@@ -27,19 +28,7 @@ border-bottom:1px solid #9f9f9f;
 cursor:pointer;
 }
 
-button#answer:hover{background-color:rgba(255,204,0,0.8);}
-
-button#answer:active{position:relative;top:2px;}
-
-
-#wrapper {
-	width: 50%;
-	margin: 0 auto;
-}
-
-
 </style>
-
 
 
 <h1 align="center">Guess the Movie!</h1>
@@ -49,17 +38,19 @@ button#answer:active{position:relative;top:2px;}
 <div align="center">
 
 <% quote_object = @movie.quotes.sample %>
-<% binding.pry %>
+<%# binding.pry %>
 <%= quote_object.quote %>
  <br>Genre: <%= @movie.genre %>
 <br>Release date: <%= @movie.release_date %>
 </div>
 <%#word = @movie.quotes.find_by id: (quote_object.id + 1)%>
-<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/movie_files/","")  %>
+<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
 <% binding.pry %>	
 <%= audio_tag bob, class: "audio-play" %>
+
 <%#binding.pry%>
 <button class="audioButton">Play</button>
+
 
 <button id="hint" type="button" >Hint</button>
 <% movies = [] %>
@@ -67,10 +58,12 @@ button#answer:active{position:relative;top:2px;}
  <% movies << Movie.all.sample.poster_url%>
 <% end ; movies << @movie.poster_url %>
 <% movies.shuffle! %>
+
 <p id="info">
-<%= @movie.overview %>
+<%= @movie.tagline %>
 
 </p>>
+
 
 <div id="wrapper">
 
@@ -92,7 +85,6 @@ button#answer:active{position:relative;top:2px;}
 			<img src="<%=movies[3]%>" height="250" width="200">
 		</button>
 	</div>
-
 </div>
 </div>
 
