@@ -38,17 +38,16 @@ cursor:pointer;
 <div align="center">
 
 <% quote_object = @movie.quotes.sample %>
-<%# binding.pry %>
+
 <%= quote_object.quote %>
  <br>Genre: <%= @movie.genre %>
-<br>Release date: <%= @movie.release_date %>
+
 </div>
-<%#word = @movie.quotes.find_by id: (quote_object.id + 1)%>
+
 <% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
-<% binding.pry %>	
+	
 <%= audio_tag bob, class: "audio-play" %>
 
-<%#binding.pry%>
 <button class="audioButton">Play</button>
 
 
@@ -56,12 +55,17 @@ cursor:pointer;
 <% movies = [] %>
 <% 3.times do %>
  <% movies << Movie.all.sample.poster_url%>
+ <% movies.uniq! %>
+   <%if movies.length < 3 %>
+    <% movies << Movie.all.sample.poster_url %>
+    <%end%>
+    
 <% end ; movies << @movie.poster_url %>
 <% movies.shuffle! %>
 
 <p id="info">
 <%= @movie.tagline %>
-
+<br>Release date: <%= @movie.release_date %>
 </p>>
 
 
