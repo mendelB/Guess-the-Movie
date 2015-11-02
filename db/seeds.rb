@@ -49,7 +49,7 @@ begin
 	end
 rescue
 	did_not_work << [movie_name, movie_id]
-	binding.pry
+
 	puts "#{index+1} did not work!!!! fck!"
 end
 	puts "finished #{index}"
