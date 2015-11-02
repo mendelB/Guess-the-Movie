@@ -28,12 +28,19 @@ button#answer:hover{background-color:rgba(255,204,0,0.8);}
 
 button#answer:active{position:relative;top:2px;}
 
+
+#wrapper {
+	width: 50%;
+	margin: 0 auto;
+}
+
+
 </style>
 
 
 
-
 <h1 align="center">Guess the Movie!</h1>
+<h3>Score:</h3><h3 id="score">0</h3>
 <div align="center">
 
 <% quote_object = @movie.quotes.sample %>
@@ -58,19 +65,35 @@ button#answer:active{position:relative;top:2px;}
 
 </p>>
 
-<div style="margin: 10 auto; width: 656px; text-align: center;">
-<button id="answer" type="button" > <img src="<%=movies[0]%>" height="200" width="175"><br> </button>
-<button id="answer" type="button" > <img src="<%=movies[1]%>" height="200" width="175"> </button>
-<button id="answer" type="button" > <img src="<%=movies[2]%>" height="200" width="175"> </button>
-<button id="answer" type="button" > <img src="<%=movies[3]%>" height="200" width="175"> </button>
+<div id="wrapper">
+
+	<div class="movie_row">
+		<button id="answer" type="button" > 
+			<img src="<%=movies[0]%>" height="250" width="200"><br> 
+		</button>
+
+		<button id="answer" type="button" >
+			<img src="<%=movies[1]%>" height="250" width="200">
+		</button>
+	</div>
+	<div class="movie_row">
+		<button id="answer" type="button" > 
+			<img src="<%=movies[2]%>" height="250" width="200">
+		</button>
+
+		<button id="answer" type="button" >
+			<img src="<%=movies[3]%>" height="250" width="200">
+		</button>
+	</div>
+
 </div>
 
 
 
 <script>
-
+$(document).ready(function() {
 $("p#info").hide();
-
+var score = 0;
 $( "button#hint" ).click(function() {
  $("p#info").toggle();
 
@@ -80,7 +103,8 @@ $(".audioButton").on("click", function() {
   return $(".audio-play")[0].play();
 });
 $('img[src="<%=@movie.poster_url%>"]').click(function(){
-	alert('hi');
+	score ++;
+	$('#score').text(score);
 });
-
+});
 </script>
