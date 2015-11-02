@@ -29,7 +29,7 @@ begin
 		genre = 'nil'
 		genre_id = 'nil'
 	end
-	id = Movie.create(
+	movie = Movie.create(
 		title: info['original_title'],
 		overview: info['overview'],
 		release_date: info['release_date'],
@@ -45,7 +45,7 @@ begin
 	)
 
 	Dir.glob("#{movie_path}/*.mp3").each_with_index do |file, i|
-			Quote.create(quote: File.open("#{movie_path}/#{i+1}", 'r').read, movie_id: id, audio_path: file)
+			Quote.create(quote: File.open("#{movie_path}/#{i+1}", 'r').read, movie_id: movie.id, audio_path: file)
 	end
 rescue
 	did_not_work << [movie_name, movie_id]
