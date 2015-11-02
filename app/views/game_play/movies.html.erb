@@ -11,6 +11,9 @@ Your browser does not support the audio element.
 <li><%= quote.quote %></li>
 <% end %>
 </ul>  -->
+<script type="text/javascript">
+	var score = 0
+</script>
 <style>
   button#answer{
 color:#08233e;
@@ -41,6 +44,8 @@ button#answer:active{position:relative;top:2px;}
 
 <h1 align="center">Guess the Movie!</h1>
 <h3>Score:</h3><h3 id="score">0</h3>
+
+<div id="body">
 <div align="center">
 
 <% quote_object = @movie.quotes.sample %>
@@ -87,13 +92,12 @@ button#answer:active{position:relative;top:2px;}
 	</div>
 
 </div>
-
+</div>
 
 
 <script>
-$(document).ready(function() {
 $("p#info").hide();
-var score = 0;
+$(document).ready(function() {
 $( "button#hint" ).click(function() {
  $("p#info").toggle();
 
@@ -103,8 +107,12 @@ $(".audioButton").on("click", function() {
   return $(".audio-play")[0].play();
 });
 $('img[src="<%=@movie.poster_url%>"]').click(function(){
+	$('#body').html('')
 	score ++;
 	$('#score').text(score);
+	$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+		$('#body').html(html).slide('slow');
+	});
 });
 });
 </script>

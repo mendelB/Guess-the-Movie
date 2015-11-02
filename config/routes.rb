@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'game_play#play'
   post '/movies' => 'game_play#movies'
+  post '/game_play/new' => 'game_play#new'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

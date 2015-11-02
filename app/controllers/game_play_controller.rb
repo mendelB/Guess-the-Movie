@@ -7,4 +7,10 @@ class GamePlayController < ApplicationController
   	@movie = Movie.all.sample
   	@movies = @movie.get_movies
   end
+
+  def new
+  	@movie = Movie.all.sample
+  	@movies = @movie.get_movies
+  end
+  
 end
