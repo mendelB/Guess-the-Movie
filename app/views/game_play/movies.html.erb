@@ -40,12 +40,14 @@ cursor:pointer;
 <div align="center">
 
 <% quote_object = @movie.quotes.sample %>
+<% binding.pry %>
 <%= quote_object.quote %>
  <br>Genre: <%= @movie.genre %>
 <br>Release date: <%= @movie.release_date %>
 </div>
 <%#word = @movie.quotes.find_by id: (quote_object.id + 1)%>
 <% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/movie_files/","")  %>
+<% binding.pry %>	
 <%= audio_tag bob, class: "audio-play" %>
 <%#binding.pry%>
 <button class="audioButton">Play</button>
