@@ -11,15 +11,15 @@
 <%= audio_tag bob, class: "audio-play" %>
 
 
-<button id="play" class="audioButton">Play</button>
+<button id="play"class="audioButton"> <p> Play </p> </button>
+<button id="hint" type="button"> <p> Hint </p> </button>
 
-<button id="hint" type="button" >Hint</button>
-<p id="info">
+<p id="info" align="left" top="340px">
 <%= @movie.tagline %>
  <br>Release date: <%= @movie.release_date %>
-</p>>
+</p>
 
-<div id="wrapper">
+<div id="wrapper" align="center">
 
 	<div class="movie_row">
 		<button id="answer" type="button" > 

@@ -17,11 +17,13 @@ Your browser does not support the audio element.
 	var wrong_count = 3;
 </script>
 <style>
+
+
   button#answer{
 color:#08233e;
 font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
 padding:14px;
-background:url(overlay.png) repeat-x center #ffcc00;background-color:rgba(255,204,0,1);
+background-color:rgba(255,204,0,1);
 border:1px solid #ffcc00;
 -moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
 border-bottom:1px solid #9f9f9f;
@@ -33,7 +35,12 @@ cursor:pointer;
   display: block;
   margin: 0 auto;
 }
-
+h1{
+	display: block;
+	color: red;
+	font-weight: bold;
+	 font-size: 2em;
+}
 </style>
 
 
@@ -54,10 +61,9 @@ cursor:pointer;
 
 <%= audio_tag bob, class: "audio-play" %>
 
-<button id="play"class="audioButton">Play</button>
+<button id="play"class="audioButton"> <p> Play </p> </button>
+<button id="hint" type="button"> <p> Hint </p> </button>
 
-
-<button id="hint" type="button" >Hint</button>
 <% movies = [] %>
 <% 3.times do %>
  <% movies << Movie.all.sample.poster_url%>
@@ -69,13 +75,13 @@ cursor:pointer;
 <% end ; movies << @movie.poster_url %>
 <% movies.shuffle! %>
 
-<p id="info">
+<p id="info" align="left" top="340px">
 <%= @movie.tagline %>
 <br>Release date: <%= @movie.release_date %>
-</p>>
+</p>
 
 
-<div id="wrapper">
+<div id="wrapper" align="center" >
 
 	<div class="movie_row">
 		<button id="answer" type="button" > 
@@ -97,6 +103,9 @@ cursor:pointer;
 	</div>
 </div>
 </div>
+
+
+
 
 
 <script>
@@ -151,8 +160,17 @@ $(document).ready(function() {
 		})}, 1000);
 		};
 	});
-
-
-
 });
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
