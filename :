@@ -44,14 +44,14 @@ button#play {
   
   transform: translateX(-50%) translateY(-50%);
   border-radius: 3px;
-}
- p.button {
+
+ h1, p {
     font-family: 'Roboto'; 
     text-align: center;
     text-transform: uppercase;
     color: #FFF;
     user-select: none;
-  
+  }
   
   &:hover {
     cursor: pointer;
@@ -80,23 +80,14 @@ h1{
   font-weight: bold;
    font-size: 2em;
 }
-p#info{
-  display: relative;
-}
-
-#hint {
-  background-color: blue;
-  width:30%;
-  float:left;
-}
 
 button#hint {
 left: 388px;
- top: 530px;
+ top: 331px;
 }
 button#play{
  left: 1051px;
-  top: 530px;
+  top: 331px;
 }
 
  
@@ -140,14 +131,15 @@ left: 388px;
   padding: 0;
   border-radius: 0.3em;
   box-shadow: 0px 0px 1em #aaa;
-  position: absolute;
-  top: 50%;
+  right: 5em;
+  top: 5em;
   width: 300px;
   overflow: hidden;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
-	display:inline-block;
+float: left
+       top: 0
 }
 .prmpt .close {
   color: #aaa;
@@ -194,8 +186,4 @@ left: 388px;
 }
 .prmpt .footer div:hover {
   background: #2591ed;
-}
-
-.text {
-
 }

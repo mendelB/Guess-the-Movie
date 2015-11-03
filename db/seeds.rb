@@ -62,6 +62,7 @@
 # 	counter += 1
 # end
 # puts did_not_work
+
 Movie.create!([
   {title: "2001: A Space Odyssey", overview: "Humanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced super computer.", release_date: "1968-04-05", poster_url: "http://image.tmdb.org/t/p/w500/90T7b2LIrL07ndYQBmSm09yqVEH.jpg", tagline: "An epic drama of adventure and exploration", runtime: 149, imdb_id: "tt0062622", tmd_id: 62, backdrop_url: "http://image.tmdb.org/t/p/w500/pckdZ29bHj11hBsV3SbVVfmCB6C.jpg", genre: "Science Fiction", genre_id: 878, adult: false, used: nil},
   {title: "42nd Street", overview: "A producer puts on what may be his last Broadway show, and at the last moment a chorus girl has to replace the star.", release_date: "1933-02-02", poster_url: "http://image.tmdb.org/t/p/w500/gjQ68VXr7QYkVnjHKaqyHYfj30v.jpg", tagline: "", runtime: 89, imdb_id: "tt0024034", tmd_id: 3062, backdrop_url: "http://image.tmdb.org/t/p/w500/hM7vlmbYyZ7BMCuNLIKYR7jYpq3.jpg", genre: "Comedy", genre_id: 35, adult: false, used: nil},
