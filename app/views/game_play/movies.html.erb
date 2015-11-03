@@ -29,6 +29,11 @@ border-bottom:1px solid #9f9f9f;
 cursor:pointer;
 }
 
+#right-answer {
+  display: block;
+  margin: 0 auto;
+}
+
 </style>
 
 
@@ -95,27 +100,59 @@ cursor:pointer;
 
 
 <script>
-$("p#info").hide();
+	$("p#info").hide();
 $(document).ready(function() {
-$( "button#hint" ).click(function() {
- $("p#info").toggle();
+	$( "button#hint" ).click(function() {
+	 $("p#info").toggle();
 
-});
-$(".audioButton").on("click", function() {
-  $(".audio-play")[0].currentTime = 0;
-  return $(".audio-play")[0].play();
-});
-$('img[src="<%=@movie.poster_url%>"]').click(function(){
+	});
+	$(".audioButton").on("click", function() {
+	  $(".audio-play")[0].currentTime = 0;
+	  return $(".audio-play")[0].play();
+	});
 
-	$('#body').html("<h1 align='center'>Correct!</h1>");
-	score ++;
-	$('#score').text(score);
-	setTimeout(function(){
-	$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
-		$('#body').hide();
-		$('#body').html(html);
-		$('#body').show('9000');
-	});}, 1000);
-});
+	timer = setTimeout(function(){
+		$('#body').html("The correct answer was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
+				wrong_count = wrong_count - 1
+				$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+				$('#body').hide();
+				$('#body').html(html);
+				$('#body').show('slow');
+				});
+	}, 10000);
+
+
+	$('img').click(function(event){
+
+		clearTimeout(timer);
+		if (event.target.src == "<%=@movie.poster_url%>") {
+			$('#body').html("<h1 align='center'>Correct!</h1>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='250'width='200'></button></div>");
+			score ++;
+		} else {
+			$('#body').html("<h1 align='center'>Incorrect!</h1>");
+			$('#body').html("The correct answer was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
+			wrong_count = wrong_count - 1
+		};
+		$('#score').text(score);
+		$('#wrong').text(wrong_count);
+
+		if (wrong_count == 0) {
+			$('#body').html("<h1 align='center'>Game Over!!</h1>");
+			$('#body').append("<a href='/'> Play Again!</a>");
+		} else {
+		setTimeout(function(){
+		$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+			$('#body').hide();
+			$('#body').html(html);
+			$('#body').show('10000');
+		})}, 1000);
+		};
+	});
+
+
+
 });
 </script>

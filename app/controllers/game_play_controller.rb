@@ -11,6 +11,7 @@ class GamePlayController < ApplicationController
   def new
   	@movie = Movie.all.sample
   	@movies = @movie.get_movies
+    render style: false
   end
   
 end
