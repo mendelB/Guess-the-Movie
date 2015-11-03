@@ -19,6 +19,14 @@ cursor:pointer;
 button#answer:hover{background-color:rgba(255,204,0,0.8);}
 
 button#answer:active{position:relative;top:2px;}
+
+
+
+
+
+
+
+
 #wrapper {
   width: 50%;
   margin: 0 auto;
@@ -26,7 +34,7 @@ button#answer:active{position:relative;top:2px;}
 
 /*css for button with hint*/
 
-.stretch, button#hint:after, button#hint:before {
+.stretch, button#play:after, button#play:before, button#hint:after, button#hint:before {
   bottom: 0;
   left: 0;
   position: absolute;
@@ -39,9 +47,17 @@ body {
   font-family: "Lato", sans-serif;
   font-size: 14px;
 }
-
 button#hint {
-  background: #439976;
+left: 174px;
+ top: 230px;
+}
+button#play{
+ left: 25;
+  top: 230px;
+}
+button#hint,
+button#play {
+  background: rgba(255,204,0,1);
   background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQzOTk3NiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzkwYWQ1MyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background-size: 100%;
   background-image: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, #439976), color-stop(100%, #90ad53));
@@ -60,17 +76,19 @@ button#hint {
   color: #d4cfc9;
   font-weight: bold;
   height: 3em;
-  left:40;
+  
   letter-spacing: 0.05em;
   margin: auto;
   outline: none;
   overflow: hidden;
   position: absolute;
   
-  top: 40;
+ 
   width: 14em;
 }
-button#hint:after {
+
+button#hint:after,
+button#play:after {
   -moz-box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
   -webkit-box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
   box-shadow: rgba(212, 207, 201, 0.75) 0 0 15px 2px;
@@ -79,17 +97,21 @@ button#hint:after {
   height: 2px;
   opacity: 0;
 }
+button#play:before,
 button#hint:before {
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAGCAYAAAAL+1RLAAAAF0lEQVQIW2NkwAIYgWKS6OIgQQxAoUoAE4AAUnD/0ugAAAAASUVORK5CYII=) repeat;
   content: "";
   opacity: 0;
 }
+button#play:hover,
 button#hint:hover {
   -webkit-animation: glitch 750ms infinite;
 }
+button#play:hover:before,
 button#hint:hover:before {
   opacity: 1;
 }
+button#play:hover:after,
 button#hint:hover:after {
   -webkit-animation: scan 2s infinite;
   opacity: 1;
