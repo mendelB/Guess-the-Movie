@@ -5,7 +5,8 @@ class GamePlayController < ApplicationController
 
   def movies
   	@movie = Movie.all.sample
-  	@movies = @movie.get_movies
+  	@movies = @movie.get_movies  
+    render style: false
   end
 
   def new
