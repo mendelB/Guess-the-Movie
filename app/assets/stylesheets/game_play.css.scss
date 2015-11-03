@@ -73,6 +73,18 @@ button#play {
 /*css for button with hint*/
 
 
+
+#right-answer {
+  display: block;
+  margin: 0 auto;
+}
+h1{
+  display: block;
+  color: red;
+  font-weight: bold;
+   font-size: 2em;
+}
+
 button#hint {
 left: 388px;
  top: 331px;

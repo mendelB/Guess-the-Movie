@@ -4,21 +4,6 @@
 <%= quote_object.quote %>
  <br>Genre: <%= @movie.genre %>
 
-</div>
-
-
-<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
-<%= audio_tag bob, class: "audio-play" %>
-
-
-<button id="play"class="audioButton"> <p> Play </p> </button>
-<button id="hint" type="button"> <p> Hint </p> </button>
-
-<p id="info" align="left" top="340px">
-<%= @movie.tagline %>
- <br>Release date: <%= @movie.release_date %>
-</p>
-
 <div id="wrapper" align="center">
 
 	<div class="movie_row">
@@ -41,6 +26,21 @@
 	</div>
 
 </div>
+</div>
+
+
+<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
+<%= audio_tag bob, class: "audio-play" %>
+
+
+<button id="play"class="audioButton"> <p> Play </p> </button>
+<button id="hint" type="button"> <p> Hint </p> </button>
+
+<p id="info" align="left" >
+<%= @movie.tagline %>
+ <br>Release date: <%= @movie.release_date %>
+</p>
+
 
 
 <script>

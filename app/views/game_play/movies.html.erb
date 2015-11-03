@@ -1,68 +1,21 @@
-<!-- <!-- <h1><%= @movie.title %></h1><br>
-<img src="<%=@movie.poster_url%>" height="400" width="300"><br>
-<%= @movie.tagline %><br>
-<%= @movie.overview %>
-<ul>
-<% @movie.quotes.each do |quote| %>
-<audio controls>
-  <source src="<%=quote.audio_path%>" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<li><%= quote.quote %></li>
-<% end %>
-</ul>  -->
+
 
 <script type="text/javascript">
 	var score = 0;
 	var wrong_count = 3;
 </script>
-<style>
 
 
-  button#answer{
-color:#08233e;
-font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
-padding:14px;
-background-color:rgba(255,204,0,1);
-border:1px solid #ffcc00;
--moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
-border-bottom:1px solid #9f9f9f;
--moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
-cursor:pointer;
-}
-
-#right-answer {
-  display: block;
-  margin: 0 auto;
-}
-h1{
-	display: block;
-	color: red;
-	font-weight: bold;
-	 font-size: 2em;
-}
-</style>
-
-
-<h1 align="center">Guess the Movie!</h1>
 <h3>Score:</h3><h3 id="score">0</h3>
 <h3>Lives:</h3><h3 id="wrong">3</h3>
 
 <div id="body">
 <div align="center">
 
+<h1 >Guess the Movie!</h1>
 <% quote_object = @movie.quotes.sample %>
 <%= quote_object.quote %>
  <br>Genre: <%= @movie.genre %>
-
-</div>
-
-<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
-
-<%= audio_tag bob, class: "audio-play" %>
-
-<button id="play"class="audioButton"> <p> Play </p> </button>
-<button id="hint" type="button"> <p> Hint </p> </button>
 
 <% movies = [] %>
 <% 3.times do %>
@@ -74,12 +27,6 @@ h1{
     
 <% end ; movies << @movie.poster_url %>
 <% movies.shuffle! %>
-
-<p id="info" align="left" top="340px">
-<%= @movie.tagline %>
-<br>Release date: <%= @movie.release_date %>
-</p>
-
 
 <div id="wrapper" align="center" >
 
@@ -103,6 +50,21 @@ h1{
 	</div>
 </div>
 </div>
+</div>
+
+<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
+
+<%= audio_tag bob, class: "audio-play" %>
+
+<button id="play"class="audioButton"> <p> Play </p> </button>
+<button id="hint" type="button"> <p> Hint </p> </button>
+
+<p id="info" align="left" >
+<%= @movie.tagline %>
+<br>Release date: <%= @movie.release_date %>
+</p>
+
+
 
 
 
