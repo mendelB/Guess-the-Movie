@@ -3,10 +3,12 @@ class Movie < ActiveRecord::Base
 
 	def get_movies
 		movies = []
-		3.times do 
- 			movies << Movie.all.sample.poster_url
-		end 
 		movies << self.poster_url
+		until movies.length == 4
+			movie = Movie.all.sample.poster_url
+			movies << movie if movie != self.poster_url
+			movies.uniq!
+		end
 		movies.shuffle!
 	end
 end

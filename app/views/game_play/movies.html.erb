@@ -3,6 +3,7 @@
 <script type="text/javascript">
 	var score = 0;
 	var wrong_count = 3;
+	var counter = 20
 </script>
 
 <div id="header">
@@ -11,6 +12,7 @@
 
 <h3>Score:</h3><h3 id="score">0</h3>
 <h3>Lives:</h3><h3 id="wrong">3</h3>
+<h3>Time Remaining:</h3><h3 id="timer">20</h3>
 
 </div>
 
@@ -28,10 +30,10 @@
 
 <script>
 	
-		$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+		$.post("/game_play/new", function(html){
 			$('#body').hide();
 			$('#body').html(html);
-			$('#body').show('10000');
+			$('#body').show();
 		});
 
 </script>
