@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <div id="wrapper" align="center" >
 	<div align="center">
@@ -10,7 +11,7 @@
  	</p>
 
 
-			<button id="answer" type="button" > 
+   	<button id="answer" type="button" > 
 				<img src="<%=@movies[0]%>" height="250" width="200"><br> 
 			</button>
 <button id="play"class="audioButton"> <p class="button"> Play </p> </button>
@@ -39,10 +40,34 @@
 
 
 
+<button id="play"class="audioButton"> <p> Play </p> </button>
+<button id="hint" type="button"> <p> Hint </p> </button>
+<div id="info" align="left" >
+	<script>
+$(function () {
+        var button1, button2, options;
+        button1 = {
+            text: 'close',
+            callback: function (prmpt) {
+                return prmpt.close();
+            }
+        };
+        options = {
+						title: '<p> <%= @movie.tagline %> <p>',
+            body: ' <p> <br>Release date: <%= @movie.release_date %></p>',
+            buttons: [button1]
+        };
+        return $('#hint').on('click', function () {
+            return $.prmpt(options);
+        });
+    });
+	</script>
 
+</div>
 
 
 <script>
+
 var counter = 20;
 $('#timer').html(counter)
 var id;
@@ -58,8 +83,9 @@ id = setInterval(function() {
 
 	$("p#info").hide();
 $(document).ready(function() {
+
 	$( "button#hint" ).click(function() {
-	 $("p#info").toggle();
+	 $("#info").toggle();
 
 	});
 	$(".audioButton").on("click", function() {
@@ -131,6 +157,7 @@ $(document).ready(function() {
 });
 
 
+
 var $button = document.querySelector('.button');
 $button.addEventListener('click', function() {
   var duration = 0.3,
@@ -141,3 +168,4 @@ $button.addEventListener('click', function() {
 });
 
 </script>
+
