@@ -11,5 +11,6 @@
  * file per style scope.
  *
  *= require_tree .
+ *= game_play
  *= require_self
  */
