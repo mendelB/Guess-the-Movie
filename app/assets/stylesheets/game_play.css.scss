@@ -44,14 +44,14 @@ button#play {
   
   transform: translateX(-50%) translateY(-50%);
   border-radius: 3px;
-
- h1, p {
+}
+ p.button {
     font-family: 'Roboto'; 
     text-align: center;
     text-transform: uppercase;
     color: #FFF;
     user-select: none;
-  }
+  
   
   &:hover {
     cursor: pointer;
@@ -80,14 +80,23 @@ h1{
   font-weight: bold;
    font-size: 2em;
 }
+p#info{
+  display: relative;
+}
+
+#hint {
+  background-color: blue;
+  width:30%;
+  float:left;
+}
 
 button#hint {
 left: 388px;
- top: 331px;
+ top: 530px;
 }
 button#play{
  left: 1051px;
-  top: 331px;
+  top: 530px;
 }
 
  
