@@ -1,14 +1,17 @@
 
 
-<div id="wrapper" align="center" style="background-color:red;">
+<div id="wrapper" align="center" >
 	<div align="center">
 	<% quote_object = @movie.quotes.sample %>
 	<h2><%= quote_object.quote.gsub(/^\w+_\don\S/, '').gsub('~ ~', '') %></h2>
 
-		<div class="movie_row" style="background-color:green;">
-	<p id="info" align="left"><%= @movie.tagline %>
+		<div class="movie_row" >
+	<p id="info" align="left">Movie Tagline: <%= @movie.tagline %>
  <br>Release date: <%= @movie.release_date %>
  	</p>
+
+<button id="play"class="audioButton"> <p class="button"> Play </p> </button>
+<button id="hint" type="button"> <p class="button"> Hint </p> </button>
 
 			<button id="answer" type="button" > 
 				<img src="<%=@movies[0]%>" height="250" width="200"><br> 
@@ -39,10 +42,6 @@
 <%= audio_tag bob, class: "audio-play" %>
 
 
-<button id="play"class="audioButton"> <p class="button"> Play </p> </button>
-<button id="hint" type="button"> <p class="button"> Hint </p> </button>
-<div id="info">
-</div>
 
 
 
