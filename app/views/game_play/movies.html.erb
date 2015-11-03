@@ -50,7 +50,7 @@ cursor:pointer;
 
 </div>
 
-<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
+<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios3/","")  %>
 
 <%= audio_tag bob, class: "audio-play" %>
 
@@ -115,13 +115,17 @@ $(document).ready(function() {
 		$('#body').html("The correct answer was: <%=@movie.title%>");
 			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
 				wrong_count = wrong_count - 1
-				$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+				$('#wrong').text(wrong_count);
+				$('#body').html("<h1 align='center'>Times up!</h1>");
+			$('#body').append("The Correct Answer Was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
+			setTimeout(function(){
+			$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
 				$('#body').hide();
 				$('#body').html(html);
-				$('#body').show('slow');
-				});
-	}, 10000);
-
+				$('#body').show('10000');
+				})}, 2500);
+	}, 20000);
 
 	$('img').click(function(event){
 
@@ -148,7 +152,7 @@ $(document).ready(function() {
 			$('#body').hide();
 			$('#body').html(html);
 			$('#body').show('10000');
-		})}, 1000);
+		})}, 2500);
 		};
 	});
 

@@ -10,7 +10,9 @@ click on next to get started!
 		$('#next').click(function(event){
 			event.preventDefault();
 			$.post('/movies', function(html){
+				$('#movie').hide();
 				$('#movie').html(html);
+				$('#movie').show('slow')
 			});
 		});
 	});

@@ -7,7 +7,7 @@
 </div>
 
 
-<% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
+<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios3/","")  %>
 <%= audio_tag bob, class: "audio-play" %>
 
 
@@ -56,24 +56,18 @@ $(document).ready(function() {
 	});
 
 
-	$('img').click(function(event){
+	timer = setTimeout(function(){
+		$('#body').html("The correct answer was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
+				wrong_count = wrong_count - 1
+				$('#score').text(score);
+				$('#wrong').text(wrong_count);
+				$('#body').html("<h1 align='center'>Times up!</h1>");
+			$('#body').append("The Correct Answer Was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
 
-
-		if (event.target.src == "<%=@movie.poster_url%>") {
-			$('#body').html("<h1 align='center'>Correct!</h1>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='250'width='200'></button></div>");
-			score ++;
-		} else {
-			$('#body').html("<h1 align='center'>Incorrect!</h1>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='250'width='200'></button></div>");
-			wrong_count = wrong_count - 1
-		};
-		$('#score').text(score);
-		$('#wrong').text(wrong_count);
-
-		if (wrong_count == 0) {
+				if (wrong_count == 0) {
 			$('#body').html("<h1 align='center'>Game Over!!</h1>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='250'width='200'></button></div>");
 			$('#body').append("<a href='/'> Play Again!</a>");
 		} else {
 		setTimeout(function(){
@@ -81,7 +75,37 @@ $(document).ready(function() {
 			$('#body').hide();
 			$('#body').html(html);
 			$('#body').show('10000');
-		})}, 1000);
+		})}, 2500);
+		};
+				
+	}, 20000);
+
+	$('img').click(function(event){
+
+		clearTimeout(timer);
+		if (event.target.src == "<%=@movie.poster_url%>") {
+			$('#body').html("<h1 align='center'>Correct!</h1>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='250'width='200'></button></div>");
+			score ++;
+		} else {
+			$('#body').html("<h1 align='center'>Incorrect!</h1>");
+			$('#body').html("The correct answer was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
+			wrong_count = wrong_count - 1
+		};
+		$('#score').text(score);
+		$('#wrong').text(wrong_count);
+
+		if (wrong_count == 0) {
+			$('#body').html("<h1 align='center'>Game Over!!</h1>");
+			$('#body').append("<a href='/'> Play Again!</a>");
+		} else {
+		setTimeout(function(){
+		$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+			$('#body').hide();
+			$('#body').html(html);
+			$('#body').show('10000');
+		})}, 2500);
 		};
 	});
 
