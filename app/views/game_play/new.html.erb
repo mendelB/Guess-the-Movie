@@ -3,17 +3,20 @@
 <% quote_object = @movie.quotes.sample %>
 <%= quote_object.quote %>
  <br>Genre: <%= @movie.genre %>
-<br>Release date: <%= @movie.release_date %>
+
 </div>
-<%#word = @movie.quotes.find_by id: (quote_object.id + 1)%>
+
+
 <% bob = quote_object.audio_path.gsub("/Users/leonardo/Development/Guess-the-Movie/app/assets/audios/","")  %>
 <%= audio_tag bob, class: "audio-play" %>
+
+
 <button class="audioButton">Play</button>
 
 <button id="hint" type="button" >Hint</button>
 <p id="info">
 <%= @movie.tagline %>
-
+ <br>Release date: <%= @movie.release_date %>
 </p>>
 
 <div id="wrapper">
