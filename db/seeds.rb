@@ -1,66 +1,66 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'open-uri'
-require 'JSON'
-counter = 0
-did_not_work = []
-files = Dir.glob("#{Rails.root}/app/assets/audios/*")
-files.each_with_index do |movie_path, index|
-begin
-	movie_name = movie_path.split('audios/')[1].gsub('_', '%20')
-	result = JSON.parse(open("https://api.themoviedb.org/3/search/movie?api_key=88f88122176bc2e5f28b97f9b05352e8&query=#{movie_name}").read)
-	movie_id = result['results'][0]['id']
-	info = JSON.parse(open("http://api.themoviedb.org/3/movie/#{movie_id}?api_key=88f88122176bc2e5f28b97f9b05352e8").read)
-	poster_url = "http://image.tmdb.org/t/p/w500" + info['poster_path']
-	if info['backdrop_path']
-		backdrop_url = "http://image.tmdb.org/t/p/w500" + info['backdrop_path']
-	else
-		backdrop_url = "nil"
-	end
-	if info['genres'].length > 0
-		genre = info['genres'][0]['name'] || 'nil'
-		genre_id = info['genres'][0]['id'] || "nil"
-	else
-		genre = 'nil'
-		genre_id = 'nil'
-	end
-	movie = Movie.create(
-		title: info['original_title'],
-		overview: info['overview'],
-		release_date: info['release_date'],
-		tagline: info['tagline'],
-		runtime: info['runtime'],
-		imdb_id: info['imdb_id'],
-		tmd_id: info['id'],
-		genre: genre,
-		genre_id: genre_id,
-		adult: info['adult'],
-		poster_url: poster_url,
-		backdrop_url: backdrop_url
-	)
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# #
+# # Examples:
+# #
+# #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+# #   Mayor.create(name: 'Emanuel', city: cities.first)
+# require 'open-uri'
+# require 'JSON'
+# counter = 0
+# did_not_work = []
+# files = Dir.glob("#{Rails.root}/app/assets/audios/*")
+# files.each_with_index do |movie_path, index|
+# begin
+# 	movie_name = movie_path.split('audios/')[1].gsub('_', '%20')
+# 	result = JSON.parse(open("https://api.themoviedb.org/3/search/movie?api_key=88f88122176bc2e5f28b97f9b05352e8&query=#{movie_name}").read)
+# 	movie_id = result['results'][0]['id']
+# 	info = JSON.parse(open("http://api.themoviedb.org/3/movie/#{movie_id}?api_key=88f88122176bc2e5f28b97f9b05352e8").read)
+# 	poster_url = "http://image.tmdb.org/t/p/w500" + info['poster_path']
+# 	if info['backdrop_path']
+# 		backdrop_url = "http://image.tmdb.org/t/p/w500" + info['backdrop_path']
+# 	else
+# 		backdrop_url = "nil"
+# 	end
+# 	if info['genres'].length > 0
+# 		genre = info['genres'][0]['name'] || 'nil'
+# 		genre_id = info['genres'][0]['id'] || "nil"
+# 	else
+# 		genre = 'nil'
+# 		genre_id = 'nil'
+# 	end
+# 	movie = Movie.create(
+# 		title: info['original_title'],
+# 		overview: info['overview'],
+# 		release_date: info['release_date'],
+# 		tagline: info['tagline'],
+# 		runtime: info['runtime'],
+# 		imdb_id: info['imdb_id'],
+# 		tmd_id: info['id'],
+# 		genre: genre,
+# 		genre_id: genre_id,
+# 		adult: info['adult'],
+# 		poster_url: poster_url,
+# 		backdrop_url: backdrop_url
+# 	)
 
-	Dir.glob("#{movie_path}/*.mp3").each_with_index do |file, i|
-			Quote.create(quote: File.open("#{movie_path}/#{i+1}", 'r').read, movie_id: movie.id, audio_path: file)
-	end
-rescue
-	did_not_work << [movie_name, movie_id]
-	binding.pry
-	puts "#{index+1} did not work!!!! fck!"
-	`say 'mendel you are awesome. but something did not work'`
-end
-	puts "finished #{index+1}"
-	if counter == 19 
-		sleep 10
-		counter = 0
-	end
-	counter += 1
-end
-puts did_not_work
+# 	Dir.glob("#{movie_path}/*.mp3").each_with_index do |file, i|
+# 			Quote.create(quote: File.open("#{movie_path}/#{i+1}", 'r').read, movie_id: movie.id, audio_path: file)
+# 	end
+# rescue
+# 	did_not_work << [movie_name, movie_id]
+# 	binding.pry
+# 	puts "#{index+1} did not work!!!! fck!"
+# 	`say 'mendel you are awesome. but something did not work'`
+# end
+# 	puts "finished #{index+1}"
+# 	if counter == 19 
+# 		sleep 10
+# 		counter = 0
+# 	end
+# 	counter += 1
+# end
+# puts did_not_work
 Movie.create!([
   {title: "2001: A Space Odyssey", overview: "Humanity finds a mysterious object buried beneath the lunar surface and sets off to find its origins with the help of HAL 9000, the world's most advanced super computer.", release_date: "1968-04-05", poster_url: "http://image.tmdb.org/t/p/w500/90T7b2LIrL07ndYQBmSm09yqVEH.jpg", tagline: "An epic drama of adventure and exploration", runtime: 149, imdb_id: "tt0062622", tmd_id: 62, backdrop_url: "http://image.tmdb.org/t/p/w500/pckdZ29bHj11hBsV3SbVVfmCB6C.jpg", genre: "Science Fiction", genre_id: 878, adult: false, used: nil},
   {title: "42nd Street", overview: "A producer puts on what may be his last Broadway show, and at the last moment a chorus girl has to replace the star.", release_date: "1933-02-02", poster_url: "http://image.tmdb.org/t/p/w500/gjQ68VXr7QYkVnjHKaqyHYfj30v.jpg", tagline: "", runtime: 89, imdb_id: "tt0024034", tmd_id: 3062, backdrop_url: "http://image.tmdb.org/t/p/w500/hM7vlmbYyZ7BMCuNLIKYR7jYpq3.jpg", genre: "Comedy", genre_id: 35, adult: false, used: nil},
