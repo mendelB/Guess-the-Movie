@@ -1915,4 +1915,3 @@ Quote.create!([
   {quote: "quotes_4on Matilda: \"Uh, Derek, I don't know if you're familiar with the belief that some aboriginal tribes hold.  It's the concept that a photo might steal a part of your soul.  I mean, what are your thoughts on that as someone who gets his picture taken for a living?\"Derek: \"Well, I guess I would have to answer your question with another question.  How many abo-digitals do you see modeling?\"~ ~\n", audio_path: "/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios/Zoolander/4.mp3", movie_id: 362},
   {quote: "quotes_5on Derek: \"Hey, Paco!\"~ ~\n", audio_path: "/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios/Zoolander/5.mp3", movie_id: 362}
 ])
->>>>>>> 070b03119c6fed066e295f310b4c239e83769706
