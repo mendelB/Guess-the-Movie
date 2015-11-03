@@ -2,6 +2,8 @@
 
 <div id="wrapper" align="center">
 <div align="center">
+<% quote_object = @movie.quotes.sample %>
+<h2><%= quote_object.quote.gsub(/^\w+_\don\S/, '').gsub('~ ~', '') %></h2>
 
 	<div class="movie_row">
 		<button id="answer" type="button" > 
@@ -27,10 +29,8 @@
 </div>
 
 
-<% quote_object = @movie.quotes.sample %>
-<h2><%= quote_object.quote.gsub(/^\w+_\don\S/, '').gsub('~ ~', '') %></h2>
 
-<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios3/","")  %>
+<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios/","")  %>
 <%= audio_tag bob, class: "audio-play" %>
 
 
@@ -55,6 +55,7 @@ $(document).ready(function() {
 	  return $(".audio-play")[0].play();
 	});
 
+		
 
 	timer = setTimeout(function(){
 		$('#body').html("The correct answer was: <%=@movie.title%>");
@@ -81,7 +82,7 @@ $(document).ready(function() {
 	}, 20000);
 
 	$('img').click(function(event){
-
+		clicked = true
 		clearTimeout(timer);
 		if (event.target.src == "<%=@movie.poster_url%>") {
 			$('#body').html("<h1 align='center'>Correct!</h1>");
@@ -98,6 +99,8 @@ $(document).ready(function() {
 
 		if (wrong_count == 0) {
 			$('#body').html("<h1 align='center'>Game Over!!</h1>");
+			$('#body').append("The correct answer was: <%=@movie.title%>");
+			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
 			$('#body').append("<a href='/'> Play Again!</a>");
 		} else {
 		setTimeout(function(){
