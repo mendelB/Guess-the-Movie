@@ -1,40 +1,7 @@
-<!-- <!-- <h1><%= @movie.title %></h1><br>
-<img src="<%=@movie.poster_url%>" height="400" width="300"><br>
-<%= @movie.tagline %><br>
-<%= @movie.overview %>
-<ul>
-<% @movie.quotes.each do |quote| %>
-<audio controls>
-  <source src="<%=quote.audio_path%>" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-<li><%= quote.quote %></li>
-<% end %>
-</ul>  -->
-
 <script type="text/javascript">
 	var score = 0;
 	var wrong_count = 3;
 </script>
-<style>
-  button#answer{
-color:#08233e;
-font:2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
-padding:14px;
-background:url(overlay.png) repeat-x center #ffcc00;background-color:rgba(255,204,0,1);
-border:1px solid #ffcc00;
--moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
-border-bottom:1px solid #9f9f9f;
--moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
-cursor:pointer;
-}
-
-#right-answer {
-  display: block;
-  margin: 0 auto;
-}
-
-</style>
 
 
 <h1 align="center">Guess the Movie!</h1>
@@ -42,121 +9,16 @@ cursor:pointer;
 <h3>Lives:</h3><h3 id="wrong">3</h3>
 
 <div id="body">
-<div align="center">
-
-<% quote_object = @movie.quotes.sample %>
-<%= quote_object.quote %>
- <br>Genre: <%= @movie.genre %>
-
+	
 </div>
-
-<% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios3/","")  %>
-
-<%= audio_tag bob, class: "audio-play" %>
-
-<button class="audioButton">Play</button>
-
-
-<button id="hint" type="button" >Hint</button>
-<% movies = [] %>
-<% 3.times do %>
- <% movies << Movie.all.sample.poster_url%>
- <% movies.uniq! %>
-   <%if movies.length < 3 %>
-    <% movies << Movie.all.sample.poster_url %>
-    <%end%>
-    
-<% end ; movies << @movie.poster_url %>
-<% movies.shuffle! %>
-
-<p id="info">
-<%= @movie.tagline %>
-<br>Release date: <%= @movie.release_date %>
-</p>>
-
-
-<div id="wrapper">
-
-	<div class="movie_row">
-		<button id="answer" type="button" > 
-			<img src="<%=@movies[0]%>" height="250" width="200"><br> 
-		</button>
-
-		<button id="answer" type="button" >
-			<img src="<%=@movies[1]%>" height="250" width="200">
-		</button>
-	</div>
-	<div class="movie_row">
-		<button id="answer" type="button" > 
-			<img src="<%=@movies[2]%>" height="250" width="200">
-		</button>
-
-		<button id="answer" type="button" >
-			<img src="<%=@movies[3]%>" height="250" width="200">
-		</button>
-	</div>
-</div>
-</div>
-
 
 <script>
-	$("p#info").hide();
-$(document).ready(function() {
-	$( "button#hint" ).click(function() {
-	 $("p#info").toggle();
-
-	});
-	$(".audioButton").on("click", function() {
-	  $(".audio-play")[0].currentTime = 0;
-	  return $(".audio-play")[0].play();
-	});
-
-	timer = setTimeout(function(){
-		$('#body').html("The correct answer was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
-				wrong_count = wrong_count - 1
-				$('#wrong').text(wrong_count);
-				$('#body').html("<h1 align='center'>Times up!</h1>");
-			$('#body').append("The Correct Answer Was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
-			setTimeout(function(){
-			$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
-				$('#body').hide();
-				$('#body').html(html);
-				$('#body').show('10000');
-				})}, 2500);
-	}, 20000);
-
-	$('img').click(function(event){
-
-		clearTimeout(timer);
-		if (event.target.src == "<%=@movie.poster_url%>") {
-			$('#body').html("<h1 align='center'>Correct!</h1>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='250'width='200'></button></div>");
-			score ++;
-		} else {
-			$('#body').html("<h1 align='center'>Incorrect!</h1>");
-			$('#body').html("The correct answer was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
-			wrong_count = wrong_count - 1
-		};
-		$('#score').text(score);
-		$('#wrong').text(wrong_count);
-
-		if (wrong_count == 0) {
-			$('#body').html("<h1 align='center'>Game Over!!</h1>");
-			$('#body').append("<a href='/'> Play Again!</a>");
-		} else {
-		setTimeout(function(){
+	
 		$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
 			$('#body').hide();
 			$('#body').html(html);
 			$('#body').show('10000');
-		})}, 2500);
-		};
-	});
+		});
 
 
-
-});
 </script>
