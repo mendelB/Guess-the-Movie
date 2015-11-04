@@ -83,7 +83,14 @@ id = setInterval(function() {
 $(document).ready(function() {
 
 	$( "button#hint" ).click(function() {
-	 $("#info").toggle();
+		if(hint_count > 0) {
+	 		hint_count --;
+			$('#hints').html(hint_count);
+		} else {
+			$("#info").html("Youre all outa hints!");
+		};
+	 		$("#info").show();
+	 		$( "button#hint" ).hide();
 
 	});
 	$(".audioButton").on("click", function() {
@@ -116,7 +123,7 @@ $(document).ready(function() {
 		})}, 2500);
 		};
 				
-	}, 20000);
+	}, 30000);
 
 	$('img').click(function(event){
 		clicked = true
@@ -149,7 +156,6 @@ $(document).ready(function() {
 		})}, 2500);
 		};
 	});
-
 
 
 });
