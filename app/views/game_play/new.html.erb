@@ -1,35 +1,33 @@
+<head>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+</head>
+
 <div id="wrapper" align="center" >
 	<div align="center">
 	<% quote_object = @movie.quotes.sample %>
 	<h2><%= quote_object.quote.gsub(/^\w+_\don\S/, '').gsub('~ ~', '') %></h2>
+<div>
+<button id="hint" class="button" > <p> Hint </p> </button>
+    <div  id="cool" class="movie_row">
+    <button id="answer" type="button" > 
+        <img src="<%=@movies[0]%>" height="250" width="200"><br> 
+      </button>
+     <button id="answer" type="button" >
+        <img src="<%=@movies[1]%>" height="250" width="200">
+      </button>
+    </div>
+<button id="play"class="button" style="float: right;" > <p> Play </p> </button>
+  
+    
+    <div class="movie_row">
+      <button id="answer" type="button" > 
+        <img src="<%=@movies[2]%>" height="250" width="200">
+      </button>
 
-		<div class="movie_row" >
-	<p id="info" align="left">Movie Tagline: <%= @movie.tagline %>
- <br>Release date: <%= @movie.release_date %>
- 	</p>
-
-
-   	<button id="answer" type="button" > 
-				<img src="<%=@movies[0]%>" height="250" width="200"><br> 
-			</button>
-<button id="play"class="audioButton"> <p class="button"> Play </p> </button>
-<button id="hint" type="button"> <p class="button"> Hint </p> </button>
-
-			<button id="answer" type="button" >
-				<img src="<%=@movies[1]%>" height="250" width="200">
-			</button>
-
-
-		</div>
-		<div class="movie_row">
-			<button id="answer" type="button" > 
-				<img src="<%=@movies[2]%>" height="250" width="200">
-			</button>
-
-			<button id="answer" type="button" >
-				<img src="<%=@movies[3]%>" height="250" width="200">
-			</button>
-		</div>
+      <button id="answer" type="button" >
+        <img src="<%=@movies[3]%>" height="250" width="200">
+      </button>
+    </div>
 
 
 <% bob = quote_object.audio_path.gsub("/Users/mendelblesofsky/Development/projects/Guess-the-Movie/app/assets/audios/","")  %>
@@ -38,8 +36,6 @@
 
 
 
-<button id="play"class="audioButton"> <p> Play </p> </button>
-<button id="hint" type="button"> <p> Hint </p> </button>
 <div id="info" align="left" >
 	<script>
 $(function () {
@@ -78,7 +74,6 @@ id = setInterval(function() {
         $('#timer').html(counter)
     }
 }, 1000);
-
 	$("p#info").hide();
 $(document).ready(function() {
 
@@ -99,8 +94,8 @@ $(document).ready(function() {
 	 		$("#info").show();
 	 		$( "button#hint" ).hide();
 	});
-
-	$(".audioButton").on("click", function() {
+	
+	$("button#play").on("click", function() {
 	  $(".audio-play")[0].currentTime = 0;
 	  return $(".audio-play")[0].play();
 	});
@@ -127,7 +122,6 @@ $(document).ready(function() {
 				$('#body').show('10000');
 			})}, 2500);
 		};
-			
 	}, 30000);
 
 	$('img').click(function(event){
@@ -159,16 +153,31 @@ $(document).ready(function() {
 		})}, 2500);
 		};
 	});
-
 });
 
-var $button = document.querySelector('.button');
-$button.addEventListener('click', function() {
+var $button = document.querySelectorAll(".button");
+ 
+$(".button").click(function() {
   var duration = 0.3,
-      delay = 0.08;
-  TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
-  TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
-  TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
+    delay = 0.08;
+  TweenMax.to($button, duration, {
+    scaleY: 1.6,
+    ease: Expo.easeOut
+  });
+  TweenMax.to($button, duration, {
+    scaleX: 1.2,
+    scaleY: 1,
+    ease: Back.easeOut,
+    easeParams: [3],
+    delay: delay
+  });
+  TweenMax.to($button, duration * 1.25, {
+    scaleX: 1,
+    scaleY: 1,
+    ease: Back.easeOut,
+    easeParams: [6],
+    delay: delay * 3
+  });
 });
 
 </script>
