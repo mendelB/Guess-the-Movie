@@ -82,6 +82,13 @@ id = setInterval(function() {
 	$("p#info").hide();
 $(document).ready(function() {
 
+	var correct_answer = function(){
+		$('#body').append("The correct answer was: <%=@movie.title%>");
+		$('#body').append(answer);
+	}
+
+	var answer = "<div class='answer'><button id='answer'type='button'><img id='more-info' src='<%=@movie.poster_url%>' height='450'width='400'></button></div><a id='more-info' href='#'>More Info</a>"
+
 	$( "button#hint" ).click(function() {
 		if(hint_count > 0) {
 	 		hint_count --;
@@ -91,8 +98,8 @@ $(document).ready(function() {
 		};
 	 		$("#info").show();
 	 		$( "button#hint" ).hide();
-
 	});
+
 	$(".audioButton").on("click", function() {
 	  $(".audio-play")[0].currentTime = 0;
 	  return $(".audio-play")[0].play();
@@ -100,29 +107,27 @@ $(document).ready(function() {
 	
 
 	timer = setTimeout(function(){
-		$('#body').html("The correct answer was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
-				wrong_count = wrong_count - 1
-				$('#score').text(score);
-				$('#wrong').text(wrong_count);
-				$('#body').html("<h1 align='center'>Times up!</h1>");
-			$('#body').append("The Correct Answer Was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img src='<%=@movie.poster_url%>' height='450'width='400'></button></div>");
 
-				if (wrong_count == 0) {
+		correct_answer();
+		wrong_count = wrong_count - 1
+		$('#score').text(score);
+		$('#wrong').text(wrong_count);
+		$('#body').html("<h1 align='center'>Times up!</h1>");
+		correct_answer();
+
+		if (wrong_count == 0) {
 			$('#body').html("<h1 align='center'>Game Over!!</h1>");
-			$('#body').html("The correct answer was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img id='more-info' src='<%=@movie.poster_url%>' height='450'width='400'></button></div><a id='more-info' href='#'>More Info</a>");
+			correct_answer();
 			$('#body').append("<a href='/'> Play Again!</a>");
 		} else {
-		setTimeout(function(){
-		$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
-			$('#body').hide();
-			$('#body').html(html);
-			$('#body').show('10000');
-		})}, 2500);
+			setTimeout(function(){
+			$.post("/game_play/new", {"right/wrong" : "right" }, function(html){
+				$('#body').hide();
+				$('#body').html(html);
+				$('#body').show('10000');
+			})}, 2500);
 		};
-				
+			
 	}, 30000);
 
 	$('img').click(function(event){
@@ -131,12 +136,11 @@ $(document).ready(function() {
 		clearInterval(id);
 		if (event.target.src == "<%=@movie.poster_url%>") {
 			$('#body').html("<h1 align='center'>Correct!</h1>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img id='more-info' src='<%=@movie.poster_url%>' height='250'width='200'></button></div><br><a id='more-info' href='#'>More Info</a>");
+			$('#body').append(answer);
 			score ++;
 		} else {
 			$('#body').html("<h1 align='center'>Incorrect!</h1>");
-			$('#body').html("The correct answer was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img id='more-info' src='<%=@movie.poster_url%>' height='450'width='400'></button></div><a id='more-info' href='#'>More Info</a>");
+			correct_answer();
 			wrong_count = wrong_count - 1
 		};
 		$('#score').text(score);
@@ -144,8 +148,7 @@ $(document).ready(function() {
 
 		if (wrong_count == 0) {
 			$('#body').html("<h1 align='center'>Game Over!!</h1>");
-			$('#body').append("The correct answer was: <%=@movie.title%>");
-			$('#body').append("<div class='answer'><button id='answer'type='button'><img id='more-info' src='<%=@movie.poster_url%>' height='450'width='400'></button></div><a id='more-info' href='#'>More Info</a><br>");
+			correct_answer();
 			$('#body').append("<a href='/'> Play Again!</a>");
 		} else {
 		setTimeout(function(){
@@ -157,10 +160,7 @@ $(document).ready(function() {
 		};
 	});
 
-
 });
-
-
 
 var $button = document.querySelector('.button');
 $button.addEventListener('click', function() {
@@ -172,4 +172,3 @@ $button.addEventListener('click', function() {
 });
 
 </script>
-

@@ -17,7 +17,7 @@ class GamePlayController < ApplicationController
     until @movie.is_clean?
       @movie = Movie.all.sample
     end
-  	@movies = @movie.get_movies
+  	@movies = @movie.get_movies_same_genre
     render style: false
   end
   
