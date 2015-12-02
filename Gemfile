@@ -45,4 +45,5 @@ group :development do
   gem 'pry'
   gem 'seed_dump'
 end
+gem 'rails_12factor', group: :production
 
